@@ -8,7 +8,7 @@ return {
       require("nvim-autopairs").setup({})
     end,
   },
-  
+
   {
     "folke/trouble.nvim",
     event = "VeryLazy",
@@ -21,5 +21,21 @@ return {
     config = function(_, opts)
       require("trouble").setup(opts)
     end,
-  }
+  },
+
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          auto_trigger = true,
+          keymap = {
+            accept = "<C-CR>",
+          },
+        },
+      })
+    end,
+  },
 }

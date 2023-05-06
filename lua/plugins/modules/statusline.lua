@@ -5,7 +5,7 @@ return {
   event = "VeryLazy",
 
   opts = function()
-    icons = {
+    local icons = {
       diagnostics = {
         Error = " ",
         Warn = " ",
