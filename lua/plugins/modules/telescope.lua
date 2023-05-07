@@ -1,14 +1,24 @@
 return {
   "nvim-telescope/telescope.nvim",
+
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-telescope/telescope-file-browser.nvim",
   },
 
   cmd = "Telescope",
 
   opts = {
     defaults = {
+      vimgrep_arguments = {
+        "rg",
+        "-L",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--smart-case",
+      },
+
       layout_config = {
         horizontal = {
           prompt_position = "top",
@@ -31,6 +41,6 @@ return {
     local telescope = require("telescope")
     telescope.setup(opts)
 
-    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("file_browser")
   end,
 }
