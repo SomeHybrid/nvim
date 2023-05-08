@@ -1,3 +1,4 @@
-require("config.settings")
+require("options")
 require("plugins")
-require("config.keymap")
+require("keymap")
+require("user_cmds")

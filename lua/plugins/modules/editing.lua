@@ -36,7 +36,7 @@ return {
     },
   },
 
-    {
+  {
     "echasnovski/mini.indentscope",
     version = "*", -- wait till new 0.7.0 release to put it back on semver
     event = { "BufReadPre", "BufNewFile" },
@@ -54,6 +54,15 @@ return {
     end,
     config = function(_, opts)
       require("mini.indentscope").setup(opts)
+    end,
+  },
+
+  {
+    "nmac427/guess-indent.nvim",
+    init = function()
+      require("guess-indent").setup({
+        filetype_exclude = { "help", "alpha", "dashboard", "Trouble", "lazy", "mason" },
+      })
     end,
   },
 
@@ -76,6 +85,6 @@ return {
           },
         },
       })
-    end,
+    end
   }
 }
