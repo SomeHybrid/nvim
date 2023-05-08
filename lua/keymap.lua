@@ -22,6 +22,8 @@ local keymaps = {
   ["j"] = { "v:count == 0 ? 'gj' : 'j'", { expr = true } },
   ["k"] = { "v:count == 0 ? 'gk' : 'k'", { expr = true } },
 
+  ["<S-Enter>"] = { "O<Esc>", { desc = "Insert new line" } },
+
   ["<leader>pd"] = { "<cmd>Lspsaga peek_definition<CR>", { desc = "Peek definition" } },
   ["<leader>gd"] = { "<cmd>Lspsaga goto_definition<CR>", { desc = "Go to definition" } },
   ["<leader>gr"] = { "<cmd>Lspsaga rename<CR>", { desc = "Rename item" } },

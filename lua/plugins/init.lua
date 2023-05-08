@@ -26,13 +26,13 @@ require("lazy").setup(
       rtp = {
         disabled_plugins = {
           "matchparen",
-          "netrw",
           "netrwPlugin",
           "matchit",
           "gzip",
           "tarPlugin",
           "tohtml",
           "zipPlugin",
+          "editorconfig",
         },
       },
     },
