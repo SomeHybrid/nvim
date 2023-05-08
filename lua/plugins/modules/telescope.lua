@@ -4,6 +4,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-fzy-native.nvim",
   },
 
   cmd = "Telescope",
@@ -12,15 +13,10 @@ return {
     defaults = {
       vimgrep_arguments = {
         "rg",
-        "-L",
-        "--color=never",
-        "--no-heading",
         "--with-filename",
-        "--line-number",
-        "--column",
+        "--vimgrep",
         "--smart-case",
       },
-
       layout_config = {
         horizontal = {
           prompt_position = "top",
@@ -37,6 +33,13 @@ return {
       color_devicons = true,
       prompt_prefix = "   ",
     },
+
+    extensions = {
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      },
+    }
   },
 
   config = function(_, opts)
@@ -44,5 +47,6 @@ return {
     telescope.setup(opts)
 
     require("telescope").load_extension("file_browser")
+    require("telescope").load_extension("fzy_native")
   end,
 }
