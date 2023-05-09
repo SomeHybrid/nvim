@@ -16,7 +16,7 @@ return {
       local cmp = require("cmp")
       return {
         completion = {
-          completeopt = "menu,menuone,noinsert",
+          completeopt = "menu,menuone,noinsert,noselect",
         },
         snippet = {
           expand = function(args)
@@ -36,10 +36,10 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp",    priority = 800, },
-          { name = "buffer",      priority = 600, },
-          { name = "path",        priority = 400 },
-          { name = "luasnip",     priority = 200, },
+          { name = "nvim_lsp", priority = 800, },
+          { name = "buffer",   priority = 600, },
+          { name = "path",     priority = 400 },
+          { name = "luasnip",  priority = 200, },
         }),
         formatting = {
           format = function(_, item)
@@ -61,11 +61,12 @@ return {
       require("cmp").setup(opts)
     end,
   },
+
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
 
-    init = function ()
+    init = function()
       require("copilot").setup({
         suggestion = {
           auto_trigger = true,

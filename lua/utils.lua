@@ -53,29 +53,34 @@ M.icons = {
 
 local function keymap(mode, lhs, rhs, opts)
   opts = opts or {}
-  opts = vim.tbl_deep_extend("keep", opts, { noremap = true, })
+  opts = vim.tbl_extend("force", { noremap = true, silent = true, }, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-M.load_mappings = function(tbl)
-  for mode, thing in pairs(tbl) do
-    for item1, item2 in pairs(thing) do
-      if item2[1] then
-        keymap(mode, item1, item2[1], vim.tbl_deep_extend("force", item2["opts"] or {}, { noremap = true, silent = true, }))
-      else
-        for i1, i2 in pairs(item2) do
-          if i2[1] then
-            keymap(mode, item1 .. i1, i2[1], vim.tbl_deep_extend("force", i2["opts"] or {}, { noremap = true, silent = true, }))
-          else
-            for lhs, item in pairs(i2) do
-              keymap(mode, item1 .. i1 .. lhs, item[1], vim.tbl_deep_extend("force", item["opts"] or {}, { noremap = true, silent = true, }))
-            end
+
+M.load_mappings = function(mappings)
+  for mode, map in pairs(mappings) do
+    for lhs, rhs in pairs(map) do
+      local keys = { lhs }
+      local values = { rhs }
+
+      while #keys > 0 do
+        local current_lhs = table.remove(keys)
+        local current_rhs = table.remove(values)
+
+        if current_rhs[1] then
+          keymap(mode, current_lhs, current_rhs[1], current_rhs.opts or {})
+        else
+          for sub_lhs, sub_rhs in pairs(current_rhs) do
+            table.insert(keys, current_lhs .. sub_lhs)
+            table.insert(values, sub_rhs)
           end
         end
       end
     end
   end
 end
+
 
 M.load_options = function(options, globals)
   for key, value in pairs(options) do
