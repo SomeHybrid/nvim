@@ -36,7 +36,6 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = "copilot-cmp", priority = 1000, },
           { name = "nvim_lsp",    priority = 800, },
           { name = "buffer",      priority = 600, },
           { name = "path",        priority = 400 },
