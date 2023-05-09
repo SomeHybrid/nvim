@@ -5,30 +5,12 @@ local telescope = require("telescope.builtin")
 local keymaps = {
   n = {
     ["<leader>"] = {
-      -- Telescope
-      ff = {
-        telescope.find_files,
-        {
-          desc = "Find files"
-        },
-      },
-      fg = {
-        telescope.live_grep,
-        {
-          desc = "Find occurence of item"
-        },
-      },
-      fo = {
-        telescope.oldfiles,
-        {
-          desc = "Recent history"
-        },
-      },
-      fb = {
-        require("telescope").extensions.file_browser.file_browser,
-        {
-          desc = "File browser"
-        },
+
+      f = {
+        f = { telescope.find_files, desc = "Find files", },
+        g = { telescope.live_grep, desc = "Find occurence of item", },
+        o = { telescope.oldfiles, desc = "Recent history", },
+        b = { require("telescope").extensions.file_browser.file_browser, desc = "File browser", },
       },
 
       -- LSP
@@ -38,48 +20,45 @@ local keymaps = {
           desc = "Preview definition"
         },
       },
-      gd = {
-        "<cmd>Lspsaga goto_definition<CR>",
-        {
-          desc = "Go to definition"
+      g = {
+        d = {
+          "<cmd>Lspsaga goto_definition<CR>",
+          {
+            desc = "Goto definition"
+          },
         },
-      },
-      gr = {
-        "<cmd>Lspsaga rename<CR>",
-        {
-          desc = "Rename item"
+        r = {
+          "<cmd>Lspsaga rename<CR>",
+          {
+            desc = "Rename"
+          },
         },
       },
 
-      -- Tabs
-      ["<Tab>1"] = {
-        "<cmd>tabfirst<cr>",
-        {
-          desc = "First tab"
+      ["<Tab>"] = {
+        ["1"] = {
+          "<cmd>tabfirst<cr>",
+          {
+            desc = "First tab"
+          },
         },
-      },
-      ["<Tab>9"] = {
-        "<cmd>tablast<cr>",
-        {
-          desc = "Last tab"
+        ["9"] = {
+          "<cmd>tablast<cr>",
+          {
+            desc = "Last tab"
+          },
         },
-      },
-      ["<Tab><Right>"] = {
-        "<cmd>tabnext<cr>",
-        {
-          desc = "Next Tab"
+        ["<Right>"] = {
+          "<cmd>tabnext<cr>",
+          {
+            desc = "Next Tab"
+          },
         },
-      },
-      ["<Tab><Left>"] = {
-        "<cmd>tabprevious<cr>",
-        {
-          desc = "Previous Tab"
-        },
-      },
-      ["<Tab>t"] = {
-        "<cmd>tabnew<cr>",
-        {
-          desc = "New Tab"
+        ["<Left>"] = {
+          "<cmd>tabprevious<cr>",
+          {
+            desc = "Previous Tab"
+          },
         },
       },
 

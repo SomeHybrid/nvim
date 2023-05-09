@@ -58,13 +58,19 @@ local function keymap(mode, lhs, rhs, opts)
 end
 
 M.load_mappings = function(tbl)
-  for mode, item in pairs(tbl) do
-    for item1, item2 in pairs(item) do
+  for mode, thing in pairs(tbl) do
+    for item1, item2 in pairs(thing) do
       if item2[1] then
         keymap(mode, item1, item2[1], vim.tbl_deep_extend("force", item2["opts"] or {}, { noremap = true, silent = true, }))
       else
-        for lhs, i in pairs(item2) do
-          keymap(mode, item1 .. lhs, i[1], vim.tbl_deep_extend("force", i["opts"] or {}, { noremap = true, silent = true, }))
+        for i1, i2 in pairs(item2) do
+          if i2[1] then
+            keymap(mode, item1 .. i1, i2[1], vim.tbl_deep_extend("force", i2["opts"] or {}, { noremap = true, silent = true, }))
+          else
+            for lhs, item in pairs(i2) do
+              keymap(mode, item1 .. i1 .. lhs, item[1], vim.tbl_deep_extend("force", item["opts"] or {}, { noremap = true, silent = true, }))
+            end
+          end
         end
       end
     end
