@@ -30,13 +30,17 @@ return {
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<Esc>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+          }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
+          { name = "copilot-cmp", priority = 1000, },
+          { name = "nvim_lsp",    priority = 800, },
+          { name = "buffer",      priority = 600, },
+          { name = "path",        priority = 400 },
+          { name = "luasnip",     priority = 200, },
         }),
         formatting = {
           format = function(_, item)
@@ -58,12 +62,11 @@ return {
       require("cmp").setup(opts)
     end,
   },
-
   {
     "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
     event = "InsertEnter",
-    config = function()
+
+    init = function ()
       require("copilot").setup({
         suggestion = {
           auto_trigger = true,

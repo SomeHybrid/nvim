@@ -64,7 +64,7 @@ return {
 
   {
     "folke/trouble.nvim",
-    event = "VeryLazy",
+    event = "LspAttach",
 
     config = function()
       require("trouble").setup({

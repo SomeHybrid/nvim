@@ -1,11 +1,20 @@
 return {
   {
+    "williamboman/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "Update", "MasonUpdateAll", },
+    dependencies = {
+      {
+        "williamboman/mason-lspconfig.nvim",
+        cmd = { "LspInstall", "LspUninstall", },
+      },
+    },
+  },
+
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
 
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "lukas-reineke/lsp-format.nvim",
       "folke/neodev.nvim",
@@ -52,9 +61,6 @@ return {
                 },
                 completion = {
                   callSnippet = "Replace"
-                },
-                diagnostics = {
-                  globals = { "vim", },
                 },
               },
             },

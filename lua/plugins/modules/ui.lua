@@ -1,7 +1,10 @@
+-- partially taken from lazyvim
+
 return {
   {
     "folke/tokyonight.nvim",
-    opts = { style = "moon" },
+    lazy = false,
+    priority = 1000,
     init = function()
       vim.cmd.colorscheme("tokyonight")
     end,
@@ -241,6 +244,8 @@ return {
     },
 
     config = function()
+      vim.notify = require("notify")
+
       require("noice").setup({
         lsp = {
           override = {
