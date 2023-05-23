@@ -9,6 +9,7 @@ return {
       "hrsh7th/cmp-path",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+      "jcdickinson/codeium.nvim",
     },
 
     opts = function()
@@ -16,7 +17,7 @@ return {
       local cmp = require("cmp")
       return {
         completion = {
-          completeopt = "menu,menuone,noinsert,noselect",
+          completeopt = "menu,menuone,noinsert",
         },
         snippet = {
           expand = function(args)
@@ -36,9 +37,10 @@ return {
           }),
         }),
         sources = cmp.config.sources({
+          { name = "codeium",  priority = 1000 },
           { name = "nvim_lsp", priority = 800, },
           { name = "buffer",   priority = 600, },
-          { name = "path",     priority = 400 },
+          { name = "path",     priority = 400, },
           { name = "luasnip",  priority = 200, },
         }),
         formatting = {
@@ -76,5 +78,6 @@ return {
         },
       })
     end,
+    enabled = false,
   },
 }
