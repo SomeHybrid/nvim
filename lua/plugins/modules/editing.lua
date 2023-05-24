@@ -10,6 +10,14 @@ return {
   },
 
   {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
 
     dependencies = {
@@ -19,6 +27,16 @@ return {
     },
 
     cmd = "Telescope",
+    keys = function()
+      local telescope = require("telescope.builtin")
+
+      return {
+        { "<leader>ff", telescope.find_files, desc = "Find files", },
+        { "<leader>fg", telescope.live_grep, desc = "Find word", },
+        { "<leader>fo", telescope.oldfiles, desc = "Recent history", },
+        { "<leader>fb", require("telescope").extensions.file_browser.file_browser, desc = "Browse files", },
+      }
+    end,
 
     opts = {
       defaults = {

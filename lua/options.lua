@@ -10,6 +10,8 @@ local options = {
   shiftwidth = 4,
   expandtab = true,
 
+  scrolloff = 8,
+
   clipboard = "unnamedplus",
 }
 

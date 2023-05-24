@@ -9,7 +9,6 @@ return {
       "hrsh7th/cmp-path",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      "jcdickinson/codeium.nvim",
     },
 
     opts = function()
@@ -37,8 +36,7 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = "codeium",  priority = 1000 },
-          { name = "nvim_lsp", priority = 800, },
+          { name = "nvim_lsp", priority = 1000, },
           { name = "buffer",   priority = 600, },
           { name = "path",     priority = 400, },
           { name = "luasnip",  priority = 200, },
@@ -66,9 +64,25 @@ return {
 
   {
     "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
 
-    init = function()
+    event = "InsertEnter",
+    keys = {
+      {
+        "<Tab>",
+        function()
+          local suggestion = require("copilot.suggestion")
+
+          if suggestion.is_visible() then
+            suggestion.accept()
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+          end
+        end,
+        desc = "Accept suggestion",
+      },
+    },
+
+    config = function()
       require("copilot").setup({
         suggestion = {
           auto_trigger = true,
@@ -78,6 +92,5 @@ return {
         },
       })
     end,
-    enabled = false,
   },
 }

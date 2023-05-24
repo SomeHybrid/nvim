@@ -15,6 +15,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
 
     dependencies = {
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "lukas-reineke/lsp-format.nvim",
       "folke/neodev.nvim",
@@ -68,6 +69,12 @@ return {
             on_attach = attach,
           })
         end,
+      })
+
+      require("lsp_lines").setup()
+
+      vim.diagnostic.config({
+        virtual_text = false,
       })
     end,
   },
