@@ -40,8 +40,7 @@ return {
 
       local function fg(name)
         ---@type {foreground?:number}?
-        local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or
-            vim.api.nvim_get_hl_by_name(name, true)
+        local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or {}
         local fg = hl and hl.fg or hl.foreground
         return fg and { fg = string.format("#%06x", fg) }
       end
@@ -208,7 +207,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "BufReadPost",
     opts = {
       char = "│",
       filetype_exclude = { "help", "alpha", "dashboard", "Trouble", "lazy", "mason" },
@@ -219,7 +218,7 @@ return {
 
   {
     "echasnovski/mini.indentscope",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "BufReadPre",
     opts = {
       symbol = "│",
       options = { try_as_border = true },

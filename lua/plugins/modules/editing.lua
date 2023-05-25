@@ -10,6 +10,16 @@ return {
   },
 
   {
+    "ggandor/leap.nvim",
+    dependencies = "tpope/vim-repeat",
+    keys = { "s", "S", },
+
+    config = function()
+      require('leap').add_default_mappings()
+    end,
+  },
+
+  {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
     config = function()
@@ -24,6 +34,11 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-fzy-native.nvim",
+
+      {
+        "nvim-telescope/telescope-frecency.nvim",
+        dependencies = "kkharji/sqlite.lua",
+      },
     },
 
     cmd = "Telescope",
@@ -35,6 +50,7 @@ return {
         { "<leader>fg", telescope.live_grep, desc = "Find word", },
         { "<leader>fo", telescope.oldfiles, desc = "Recent history", },
         { "<leader>fb", require("telescope").extensions.file_browser.file_browser, desc = "Browse files", },
+        { "<leader><leader>", require('telescope').extensions.frecency.frecency, desc = "Frecency", },
       }
     end,
 
@@ -77,31 +93,25 @@ return {
 
       require("telescope").load_extension("file_browser")
       require("telescope").load_extension("fzy_native")
+      require("telescope").load_extension("frecency")
     end,
   },
 
   {
     "folke/trouble.nvim",
-    event = "LspAttach",
-
-    config = function()
-      require("trouble").setup({
-        auto_start = true,
-        auto_close = true,
-      })
-    end,
+    event = "BufReadPost",
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     cmd = "TSInstall",
-    event = "VimEnter",
+    event = "BufReadPre",
 
     build = function()
-      vim.cmd.TSUpdate()
+      require("nvim-treesitter.install").update()
     end,
 
-    init = function()
+    config = function()
       require("nvim-treesitter.configs").setup({
         sync_install = false,
         auto_install = true,

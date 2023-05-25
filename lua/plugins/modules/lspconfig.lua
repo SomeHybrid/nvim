@@ -12,13 +12,18 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "BufReadPre",
 
     dependencies = {
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+
       "hrsh7th/cmp-nvim-lsp",
+
       "lukas-reineke/lsp-format.nvim",
       "folke/neodev.nvim",
+
+      "mfussenegger/nvim-dap",
+      "jay-babu/mason-nvim-dap.nvim",
     },
 
     config = function()
@@ -76,6 +81,8 @@ return {
       vim.diagnostic.config({
         virtual_text = false,
       })
+
+      require("mason-nvim-dap").setup({})
     end,
   },
 
@@ -83,6 +90,11 @@ return {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
     dependencies = "nvim-tree/nvim-web-devicons",
+
+    keys = {
+      { "gd", "<cmd>Lspsaga goto_definition<CR>", desc = "Go to definition", },
+      { "gp", "<cmd>Lspsaga peek_definition<CR>", desc = "Peek definition", },
+    },
 
     config = function()
       require("lspsaga").setup({})
