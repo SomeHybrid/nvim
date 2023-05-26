@@ -7,8 +7,24 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
+      "ray-x/cmp-treesitter",
+
+      {
+        "L3MON4D3/LuaSnip",
+
+        build = (not jit.os:find("Windows"))
+            and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
+            or nil,
+
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          "saadparwaiz1/cmp_luasnip",
+        },
+
+        config = function()
+          require("luasnip/loaders/from_vscode").lazy_load()
+        end,
+      },
     },
 
     opts = function()
@@ -37,6 +53,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 1000, },
+          { name = "treesitter", priority = 1000, },
           { name = "buffer",   priority = 600, },
           { name = "path",     priority = 400, },
           { name = "luasnip",  priority = 200, },
@@ -66,6 +83,7 @@ return {
     "zbirenbaum/copilot.lua",
 
     event = "InsertEnter",
+
     keys = {
       {
         "<Tab>",
@@ -79,6 +97,7 @@ return {
           end
         end,
         desc = "Accept suggestion",
+        mode = "i",
       },
     },
 
@@ -94,3 +113,4 @@ return {
     end,
   },
 }
+

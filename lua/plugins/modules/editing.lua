@@ -46,11 +46,11 @@ return {
       local telescope = require("telescope.builtin")
 
       return {
-        { "<leader>ff", telescope.find_files, desc = "Find files", },
-        { "<leader>fg", telescope.live_grep, desc = "Find word", },
-        { "<leader>fo", telescope.oldfiles, desc = "Recent history", },
-        { "<leader>fb", require("telescope").extensions.file_browser.file_browser, desc = "Browse files", },
-        { "<leader><leader>", require('telescope').extensions.frecency.frecency, desc = "Frecency", },
+        { "<leader>ff",       telescope.find_files,                                      desc = "Find files", },
+        { "<leader>fg",       telescope.live_grep,                                       desc = "Find word", },
+        { "<leader>fo",       telescope.oldfiles,                                        desc = "Recent history", },
+        { "<leader>fb",       require("telescope").extensions.file_browser.file_browser, desc = "Browse files", },
+        { "<leader><leader>", require('telescope').extensions.frecency.frecency,         desc = "Frecency", },
       }
     end,
 
