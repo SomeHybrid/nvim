@@ -99,13 +99,13 @@ return {
 
   {
     "folke/trouble.nvim",
-    event = "BufReadPost",
+    event = "LspAttach",
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     cmd = "TSInstall",
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile", },
 
     build = function()
       require("nvim-treesitter.install").update()

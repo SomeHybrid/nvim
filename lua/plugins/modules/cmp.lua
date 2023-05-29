@@ -3,17 +3,17 @@ return {
     "hrsh7th/nvim-cmp",
     version = false,
     event = "InsertEnter",
+
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
       "ray-x/cmp-treesitter",
+      "hrsh7th/cmp-path",
 
       {
         "L3MON4D3/LuaSnip",
 
         build = (not jit.os:find("Windows"))
-            and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
+            and "make install_jsregexp"
             or nil,
 
         dependencies = {
@@ -52,11 +52,11 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp", priority = 1000, },
+          { name = "nvim_lsp",   priority = 900, },
           { name = "treesitter", priority = 1000, },
-          { name = "buffer",   priority = 600, },
-          { name = "path",     priority = 400, },
-          { name = "luasnip",  priority = 200, },
+          { name = "buffer",     priority = 800, },
+          { name = "path",       priority = 600, },
+          { name = "luasnip",    priority = 400, },
         }),
         formatting = {
           format = function(_, item)
@@ -66,16 +66,7 @@ return {
             return item
           end,
         },
-        experimental = {
-          ghost_text = {
-            hl_group = "LspCodeLens",
-          },
-        },
       }
-    end,
-
-    config = function(_, opts)
-      require("cmp").setup(opts)
     end,
   },
 
@@ -113,4 +104,3 @@ return {
     end,
   },
 }
-
