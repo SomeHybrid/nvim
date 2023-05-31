@@ -19,8 +19,6 @@ return {
 
       "hrsh7th/cmp-nvim-lsp",
 
-      "SmiteshP/nvim-navic",
-
       "lukas-reineke/lsp-format.nvim",
       "folke/neodev.nvim",
 
@@ -50,13 +48,7 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       mlsp.setup()
-      local attach = function(client, bufnr)
-        require("lsp-format").on_attach(client)
-
-        if client.server_capabilities.documentSymbolProvider then
-          require("nvim-navic").attach(client, bufnr)
-        end
-      end
+      local attach = require("lsp-format").on_attach
 
       mlsp.setup_handlers({
         function(server)
